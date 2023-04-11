@@ -1,6 +1,6 @@
 package model
 
-type AuthorModel struct {
+type Audit struct {
 	CreatedBy string
 	UpdatedBy string
 }

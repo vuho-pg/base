@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Demo struct {
 	gorm.Model
-	AuthorModel
+	Audit
 	Name  string
 	Value string
 }
