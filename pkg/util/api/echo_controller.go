@@ -10,7 +10,7 @@ import (
 var globalValidator = validator.New()
 
 type EchoController interface {
-	Register(e *echo.Echo)
+	Register(e *echo.Group)
 }
 
 type echoController struct {
@@ -25,7 +25,7 @@ func (echoController) ServeResponse(e echo.Context, resp Response) error {
 	return e.JSON(resp.GetCode(), resp)
 }
 
-func ServeEcho[T any](e echo.Context, fn func(ctx context.Context, data T) (*Response, error)) error {
+func ServeEcho[T any](e echo.Context, fn func(ctx context.Context, data T) (Response, error)) error {
 	var c echoController
 	var data T
 	if err := e.Bind(&data); err != nil {
@@ -38,5 +38,5 @@ func ServeEcho[T any](e echo.Context, fn func(ctx context.Context, data T) (*Res
 	if err != nil {
 		return c.ServeError(e, err)
 	}
-	return c.ServeResponse(e, *resp)
+	return c.ServeResponse(e, resp)
 }

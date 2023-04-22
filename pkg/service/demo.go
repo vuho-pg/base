@@ -10,6 +10,7 @@ import (
 )
 
 type DemoService interface {
+	Create(ctx context.Context, req dto.CreateDemo) (api.Response, error)
 }
 
 type demoService struct {
